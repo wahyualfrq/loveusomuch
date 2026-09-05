@@ -30,7 +30,7 @@
                     <input type="file" id="video-input" accept="video/mp4,video/webm,video/ogg,video/quicktime,video/x-matroska" hidden>
                 </div>
 
-                <!-- Integrated Bottom Bar (Exact Reference Style, No Skip Button) -->
+                <!-- Integrated Bottom Bar (Exact Reference Style + Audio Control) -->
                 <div class="bottom-control-bar">
                     <!-- Circular Glowing Blue Play/Pause Button -->
                     <button class="circle-play-btn" id="btn-play-pause" title="Play / Pause">
@@ -51,7 +51,21 @@
                         <span class="time-display" id="time-display">0:00</span>
                     </div>
 
-                    <!-- Single Download / Save Button (NO SKIP BUTTON) -->
+                    <!-- Mute / Unmute Audio Button -->
+                    <button class="mute-btn" id="btn-mute" title="Aktifkan / Matikan Suara">
+                        <svg class="icon-volume-mute" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <line x1="23" y1="9" x2="17" y2="15"></line>
+                            <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                        <svg class="icon-volume-high hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Single Download / Save Button -->
                     <a id="download-btn" class="btn-download-save" href="https://github.com/wahyualfrq/loveusomuch/releases/download/v1/copy_E7C528BA-8515-4805-9791-3849F38EE832.mov" download="loveusomuch.mov" target="_blank" rel="noopener noreferrer">
                         <svg class="download-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>

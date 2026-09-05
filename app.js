@@ -14,15 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressFill = document.getElementById('progress-fill');
     const timeDisplay = document.getElementById('time-display');
 
+    const btnMute = document.getElementById('btn-mute');
+
     let iconPause = btnPlayPause ? btnPlayPause.querySelector('.icon-pause') : null;
     let iconPlay = btnPlayPause ? btnPlayPause.querySelector('.icon-play') : null;
+    let iconVolMute = btnMute ? btnMute.querySelector('.icon-volume-mute') : null;
+    let iconVolHigh = btnMute ? btnMute.querySelector('.icon-volume-high') : null;
 
     let activeObjectUrl = null;
 
-    // Autoplay on load
+    // Autoplay on load (Muted initially due to browser autoplay policy)
     function initAutoplay() {
         if (videoElement) {
             videoElement.muted = true;
+            updateVolumeUI();
             videoElement.play().then(() => {
                 updatePlayPauseUI(true);
             }).catch(error => {
@@ -32,8 +37,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Toggle Audio Mute / Unmute
+    function toggleMute() {
+        if (!videoElement) return;
+        videoElement.muted = !videoElement.muted;
+        updateVolumeUI();
+    }
+
+    function updateVolumeUI() {
+        if (!iconVolMute || !iconVolHigh || !videoElement) return;
+        if (videoElement.muted) {
+            iconVolMute.classList.remove('hidden');
+            iconVolHigh.classList.add('hidden');
+        } else {
+            iconVolMute.classList.add('hidden');
+            iconVolHigh.classList.remove('hidden');
+        }
+    }
+
+    // Unmute audio on first user click/tap anywhere
+    function enableAudioOnInteraction() {
+        if (videoElement && videoElement.muted) {
+            videoElement.muted = false;
+            updateVolumeUI();
+        }
+        document.removeEventListener('click', enableAudioOnInteraction);
+        document.removeEventListener('touchstart', enableAudioOnInteraction);
+    }
+
+    document.addEventListener('click', enableAudioOnInteraction, { once: true });
+    document.addEventListener('touchstart', enableAudioOnInteraction, { once: true });
+
+    if (btnMute) {
+        btnMute.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMute();
+        });
+    }
+
     function togglePlay() {
         if (!videoElement) return;
+        if (videoElement.muted) {
+            videoElement.muted = false;
+            updateVolumeUI();
+        }
         if (videoElement.paused) {
             videoElement.play();
             updatePlayPauseUI(true);

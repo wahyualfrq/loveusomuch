@@ -172,6 +172,28 @@ body {
     letter-spacing: 0.03em;
 }
 
+/* Audio Mute/Unmute Button */
+.mute-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00d2ff;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.mute-btn:hover {
+    background: rgba(0, 210, 255, 0.15);
+    border-color: #00d2ff;
+    transform: scale(1.05);
+}
+
 /* Compact Save / Download Button (NO SKIP BUTTON) */
 .btn-download-save {
     display: inline-flex;
